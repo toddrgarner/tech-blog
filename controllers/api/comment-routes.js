@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Comment } = require('../../utils/auth');
+const { Comment } = require('../../utils/models');
 const withAuth = require('../../utils/auth');
 
 router.get('/', (req, res) =>{
@@ -11,8 +11,8 @@ router.get('/', (req, res) =>{
     }); 
 });
 
-router.post.apply('/', withAuth, (req, res) => {
-    // expects => {comment, user_id: 1, post_id: 2}
+router.post('/', withAuth, (req, res) => {
+    // expects => {comment_text: "T"his is the comment", user_id: 1, post_id: 2}
     console.log(req, body);
     console.log(req.session.user._id)
     Comment.create({
