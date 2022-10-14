@@ -10,7 +10,7 @@ const seeAll = async () => {
     await seedUsers();
     console.log('--------------');
 
-    await seedPoxsts();
+    await seedPosts();
     console.log('--------------');
 
     await seedComments();
