@@ -18,7 +18,8 @@
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
     "install": "^0.13.0",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.25.3"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,5 @@
   "bugs": {
     "url": "https://github.com/toddrgarner/tech-blog/issues"
   },
-  "homepage": "https://github.com/toddrgarner/tech-blog#readme",
-  "devDependencies": {}
+  "homepage": "https://github.com/toddrgarner/tech-blog#readme"
 }
