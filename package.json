@@ -1,7 +1,7 @@
 {
   "name": "tech-blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "<!-- https://git.heroku.com/arcane-everglades-72967.git --> <!-- https://arcane-everglades-72967.herokuapp.com -->",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -19,5 +19,14 @@
     "express-session": "^1.17.3",
     "install": "^0.13.0",
     "mysql2": "^2.3.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toddrgarner/tech-blog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/toddrgarner/tech-blog/issues"
+  },
+  "homepage": "https://github.com/toddrgarner/tech-blog#readme",
+  "devDependencies": {}
 }
