@@ -1,10 +1,10 @@
 const seedUsers = require('./user-seeds');
-const seedPoxsts = require('./post-seed');
-const seedComments = require('./comments-seeds');
+const seedPoxsts = require('./post-seeds');
+const seedComments = require('./comment-seeds');
 
-const sequelize = require('./config/commection');
+const sequelize = require('../config/connection');
 
-const seeAll = async () => {
+const seedAll = async () => {
     await sequelize.sync({ force: true});
     console.log('--------------');
     await seedUsers();
