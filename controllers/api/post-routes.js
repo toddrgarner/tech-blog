@@ -73,8 +73,8 @@ router.get('/:id', (req, res) => {
             res.status(500).json(err);
         });
 });
-
-router.post('/', withAuth, (req, res) => {
+// add withauth before (req, res)
+router.post('/', (req, res) => {
     // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
     Post.create({
         title: req.body.title,
@@ -87,8 +87,8 @@ router.post('/', withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
-
-router.put('/:id', withAuth, (req, res) => {
+// add withauth before (req, res)
+router.put('/:id', (req, res) => {
     Post.update(
         {
             title: req.body.title,
@@ -112,8 +112,8 @@ router.put('/:id', withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
-
-router.delete('/:id', withAuth, (req, res) => {
+// add withauth before (req, res)
+router.delete('/:id', (req, res) => {
     console.log('id', req.params.id);
     Post.destroy({
         where: {
