@@ -11,13 +11,12 @@ router.get('/', (req, res) => {
             'id',
             'title',
             'description',
-            //'created_at'
+            'created_at'
         ],
         include: [
             {
                 model: Comment,
-                attributes: ['id', 'comment_text', 'post_id', 'user_id', //'created_at'
-            ],
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model: User,
                     attributes: ['username']
@@ -45,14 +44,12 @@ router.get('/:id', (req, res) => {
             'id',
             'title',
             'description',
-            //'created_at',
+            'created_at',
         ],
         include: [
             {
                 model: Comment,
-                attributes: ['id', 'comment_text', 'post_id', 'user_id', 
-                //'created_at'
-            ],
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
                 include: {
                     model: User,
                     attributes: ['username']
@@ -77,8 +74,8 @@ router.get('/:id', (req, res) => {
         });
 });
 // add withauth before (req, res)
-router.post('/', (req, res) => {
-    // expects {title: 'Taskmaster goes public!', post_url: 'https://taskmaster.com/press', user_id: 1}
+router.post('/', withAuth, (req, res) => {
+
     Post.create({
         title: req.body.title,
         description: req.body.description,
@@ -91,7 +88,7 @@ router.post('/', (req, res) => {
         });
 });
 // add withauth before (req, res)
-router.put('/:id', (req, res) => {
+router.put('/:id', withAuth, (req, res) => {
     Post.update(
         {
             title: req.body.title,
@@ -116,7 +113,7 @@ router.put('/:id', (req, res) => {
         });
 });
 // add withauth before (req, res)
-router.delete('/:id', (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     console.log('id', req.params.id);
     Post.destroy({
         where: {

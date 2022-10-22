@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 });
 // add withauth before (req, res)
 router.post('/', withAuth, (req, res) => {
-    // expects => {comment_text: "T"his is the comment", user_id: 1, post_id: 2}
+    // expects => {comment_text: "This is the comment", user_id: 1, post_id: 2}
     console.log(req. body);
     console.log(req.session.user._id)
     Comment.create({
