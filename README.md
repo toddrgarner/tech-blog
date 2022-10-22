@@ -1,5 +1,9 @@
 # tech-blog
 
+
+
+
+
 <!-- toddgarner@MacBook-Pro tech-blog % git remote -v
 origin  git@github.com:toddrgarner/tech-blog.git (fetch)
 origin  git@github.com:toddrgarner/tech-blog.git (push)
