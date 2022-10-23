@@ -1,84 +1,47 @@
 const router = require('express').Router();
-const sequelize = require('sequelize');
-const { Post, User, Comment } = require('../../models/');
-// const withAuth = require('../utils/auth');
+const { Comment } = require('../../models');
+// const withAuth = require('../../utils/auth');
 
-// get all posts for dashboard
 router.get('/', (req, res) => {
-    console.log(req.session);
-    console.log('======================');
-    Post.findAll({
-        where: {
-            // user_id: req.session.user_id
-        },
-        attributes: [
-            'id',
-            'title',
-            'description',
-            // 'created_at'or just
-        ],
-        include: [
-            {
-                model: Comment,
-                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                include: {
-                    model: User,
-                    attributes: ['username']
-                }
-            },
-            {
-                model: User,
-                attributes: ['username']
-            }
-        ]
-    })
-        .then(dbPostData => {
-            const posts = dbPostData.map(post => post.get({ plain: true }));
-            console.log(posts);
-            res.render('dashboard', { posts, loggedIn: true });
-        })
+    Comment.findAll()
+        .then(dbCommentData => res.json(dbCommentData))
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
         });
 });
 
-router.get('/edit/:id', (req, res) => {
-    Post.findByPk(req.params.id, {
-        attributes: [
-            'id',
-            'title',
-            'description',
-            'created_at'
-        ],
-        include: [
-            {
-                model: Comment,
-                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                include: {
-                    model: User,
-                    attributes: ['username']
-                }
-            },
-            {
-                model: User,
-                attributes: ['username']
-            }
-        ]
+router.post('/', (req, res) => {
+    // expects => {comment_text: "This is the comment", user_id: 1, post_id: 2}
+    console.log(req.body);
+    console.log(req.session.user_id)
+    Comment.create({
+        comment_text: req.body.comment_text,
+        user_id: req.session.user_id,
+        post_id: req.body.post_id
     })
-        .then(dbPostData => {
-            if (dbPostData) {
-                const post = dbPostData.get({ plain: true });
+        .then(dbCommentData => res.json(dbCommentData))
+        .catch(err => {
+            console.log(err);
+            res.status(400).json(err);
+        });
+});
 
-                res.render('edit-post', {
-                    post,
-                    loggedIn: true
-                });
-            } else {
-                res.status(404).end();
+router.delete('/:id', (req, res) => {
+    Comment.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(dbCommentData => {
+            if (!dbCommentData) {
+                res.status(404).json({ message: 'No comment found with this id!' });
+                return;
             }
+            res.json(dbCommentData);
         })
         .catch(err => {
+            console.log(err);
             res.status(500).json(err);
         });
 });
