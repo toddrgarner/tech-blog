@@ -9,13 +9,13 @@ router.get('/', (req, res) => {
     console.log('======================');
     Post.findAll({
         where: {
-            user_id: req.session.user_id
+            // user_id: req.session.user_id
         },
         attributes: [
             'id',
             'title',
             'description',
-            'created_at'
+            // 'created_at'or just
         ],
         include: [
             {
