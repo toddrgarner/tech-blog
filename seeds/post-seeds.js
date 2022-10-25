@@ -1,4 +1,4 @@
-const { Post } = require('../models/Index');
+const { Post } = require('../seq-models');
 
 const postdata = [
 {    
